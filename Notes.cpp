@@ -33,5 +33,15 @@ ftell(FILE* file): long									/// İmlecin geçerli konumunu verir. Binary dos
 rewind(FILE* file): void								/// Imlecin konumunu dosyanın başlangıcına ayarla.
 fread(void* dstBuf, size_t elementSize, size_t count, FILE* file): size_t 	/// Return olarak başarıyla okunan öge sayısını döndürür. Bu sayı count değrinde farklıyasa okumayı başarılı olarak yapamamışdır. Her hangi bir hata durumda ise ferror ve feof dönderir.
 fwrite(const void* str, size_t size, size_t count, FILE* file): size_t		/// Return olarak başarıyla yazılan öge sayısını döndürür. Bu sayı count değrinde farklıyasa yazmayı başarılı olarak yapamamışdır. Her hangi bir hata durumda ise ferror ve feof dönderir.
+clearerr(FILE* file): void								/// Tüm hata durumlarını sıfırla
+getc(FILE* stream): int									/// Dosyadan karaker olarak okur. Dönüş olarak okunan karakteri döner eğer boş dosya içeriği -1 döner. Her hangi bir hata durumda ise feof dönderir.
+putc(int ch, FILE* file): int							/// Dosya içeriğine char tipinde veri yazar. Yazılan karakteri int olarak geri döndür. Her hangi bir hata durumda ise ferror dönderir.
 printf(const char* format, ...): int					/// Ekrana çıktı verir. Aynı zamanda yazılan değerin uzunluğunu verir. Başarı durumunda yazılan toplam karakter sayısını döndürür. Her hangi bir hata durumda ise ferror dönderir.
 scanf(const char* format, ...): int						/// Input girdi alır. Başarı durumunda okun input sayısını dönderiyor. Her hangi bir hata durumda ise ferror ve feof dönderir.
+perror(const char* str): void							/// Hata mesajlarını yazdırır.
+getchar(void): int										/// Standart input dan girdi alır. Karakter olarak. Başarılı olduğunda, okunan karakter döndürülür Her hangi bir hata durumda ise feof veya ferror dönderir.
+gets(char* str): char*									/// Standart input dan veri okur değişkene yazar. Başarı durumunda okunan stringi döner. Eğer bir değer boş ise dönüşü null olur. Her hangi bir hata durumda ise feof dönderir.
+putchar(int ch): int									/// Standart output dan çıktı verir, Karakter olarak. Başarılı olduğunda, yazılan karakter döndürülür. Her hangi bir hata durumda ise feof veya ferror dönderir.
+puts(const char* str); int								/// Standart output dan çıktı verir. Başarı durumunda posiztif, başarısız durumunda negatif değer döner. Her hangi bir hata durumda ise ferror dönderir.
+
+
