@@ -1,9 +1,13 @@
 /***************** stdio.h *****************/
 /*** define ***/
+BUFSIZ													/// 512 -- Buffer Size için
+_IOFBF													/// 0x0000 -- Tam olarak ara belleğe al
+_IOLBF													/// 0x0040 -- Satır olarak ara belleğe al
+_IONBF													/// 0x0004 -- Ara belleğe alma
 EOF														/// -1 değeri -- End Of File
-SEEK_SET												/// 0 değeri -- Dosya Bailangıcı
+SEEK_SET												/// 0 değeri -- Dosya Başlangıcı
 SEEK_END												/// 2 değeri -- Dosyanın Sonu
-SEEK_CUR												/// 1 değeri -- Dosyanın feçerli konumu
+SEEK_CUR												/// 1 değeri -- Dosyanın geçerli konumu
 stdout													/// __acrt_iob_func(1): FILE* -- Standart çıkış
 stderr													/// __acrt_iob_func(2): FILE* -- Standart Hata Çıkışı
 stdin													/// __acrt_iob_func(0): FILE* -- Standart Input
@@ -36,12 +40,18 @@ fwrite(const void* str, size_t size, size_t count, FILE* file): size_t		/// Retu
 clearerr(FILE* file): void								/// Tüm hata durumlarını sıfırla
 getc(FILE* stream): int									/// Dosyadan karaker olarak okur. Dönüş olarak okunan karakteri döner eğer boş dosya içeriği -1 döner. Her hangi bir hata durumda ise feof dönderir.
 putc(int ch, FILE* file): int							/// Dosya içeriğine char tipinde veri yazar. Yazılan karakteri int olarak geri döndür. Her hangi bir hata durumda ise ferror dönderir.
+ungetc(int ch, FILE* file): int							/// Dosyadan okunan ilk karakteri alır verilen karakter ile değiştirilir. Aynı zamanda fgetc veya getc dönmesini engeller ilk karakteri almasını sağlar. Başarı durumunda geri konulan karakteri iade eder. Her hangi bir hata durumda ise feof dönderir.
+setbuf(FILE* file, char* buffer): void					/// Dosya arasında bir ara bellek olarak davranır.
+setvbuf(FILE* file, char* buffer, int mode, size_t size): int /// Dosya arasında bir ara bellek oluşturur. Başarı durumunda 0 değeri döner, başarısız durumunda sıfırdan farklı bir değer döner.
 printf(const char* format, ...): int					/// Ekrana çıktı verir. Aynı zamanda yazılan değerin uzunluğunu verir. Başarı durumunda yazılan toplam karakter sayısını döndürür. Her hangi bir hata durumda ise ferror dönderir.
 scanf(const char* format, ...): int						/// Input girdi alır. Başarı durumunda okun input sayısını dönderiyor. Her hangi bir hata durumda ise ferror ve feof dönderir.
 perror(const char* str): void							/// Hata mesajlarını yazdırır.
 getchar(void): int										/// Standart input dan girdi alır. Karakter olarak. Başarılı olduğunda, okunan karakter döndürülür Her hangi bir hata durumda ise feof veya ferror dönderir.
 gets(char* str): char*									/// Standart input dan veri okur değişkene yazar. Başarı durumunda okunan stringi döner. Eğer bir değer boş ise dönüşü null olur. Her hangi bir hata durumda ise feof dönderir.
 putchar(int ch): int									/// Standart output dan çıktı verir, Karakter olarak. Başarılı olduğunda, yazılan karakter döndürülür. Her hangi bir hata durumda ise feof veya ferror dönderir.
-puts(const char* str); int								/// Standart output dan çıktı verir. Başarı durumunda posiztif, başarısız durumunda negatif değer döner. Her hangi bir hata durumda ise ferror dönderir.
+puts(const char* str): int								/// Standart output dan çıktı verir. Başarı durumunda posiztif, başarısız durumunda negatif değer döner. Her hangi bir hata durumda ise ferror dönderir.
+snprintf(char* stream, size_t n, const char* format, ...): int /// Belirtilen buffer arrayinde formatlanmış bir şekilde saklar. Başarı durumda yazılan verinibn uzunluğunu verir. Başarısız -1 değeri döner. Only C++11
+sprintf(char* stream, const char* format, ...): int		/// Belirtilen buffer arrayinde formatlanmış bir şekilde saklar. Başarı durumda yazılan verinin uzunluğunu verir. Başarısız -1 değeri döner
+sscanf(const char* source, const char* format, ...): int/// Belirtilen c dizisinden verilen değişkelere okumayı yapar. Başarı durumunda ise okunan değer sayıdını döner. Başarısız -1 değeri döner
 
 

@@ -6,18 +6,28 @@ int main(int argc, char** argv)
 	int ch;
 	char buffer[256];
 	
-	fptr = fopen("01.txt", "rt");
-	if(fptr != NULL)
+	fptr = fopen("01.txt", "r");
+	if(fptr != NULL) 
 	{
 		while(!feof(fptr))
 		{
-			ch = getc(fptr);
-			if(ch == EOF) break;
-			(ch == '#') ? ungetc('@', fptr) : ungetc(ch, fptr);
-			if(fgets(buffer, 255, fptr) != NULL) fputs(buffer, stdout); else break;
+			ch = fgetc(fptr);
+			(ch == '!') ? printf("%c - ", ungetc('+', fptr)) : printf("%c - ", ungetc(ch, fptr));
+			fgets(buffer, 255, fptr);
+			fputs(buffer, stdout); 				/// stdout ile console üzerine çıktıyı verir.
 		}
 	}
 	fclose(fptr);
 	
 	return 0;
 }
+
+/***
+
+Dosya İçeriği
+
+this is tutorial
+!c standard library
+!library functions and macros
+
+***/
