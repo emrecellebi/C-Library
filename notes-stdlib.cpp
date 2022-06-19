@@ -2,6 +2,14 @@
 /*** define ***/
 EXIT_SUCCESS 											/// 0 --- Çıkış kodu
 EXIT_FAILURE 											/// 1 --- Çıkış Iptal kodu
+MB_CUR_MAX 												/// ___mb_cur_max_func() --- Maximum bayt sayısı
+__mb_cur_m 												/// ___mb_cur_max_func() --- Maximum bayt sayısı
+RAND_MAX 												/// 0x7fff --- 
+
+/*** typedef struct ***/
+div_t													/// int quot, int rem --- veriler tutulur.
+ldiv_t													/// long quot, long rem --- veriler tutulur.
+lldiv_t													/// long long quot, long long rem --- veriler tutulur.
 
 /*** method ***/
 atof(const char* str): double							/// String to double converter. Başarı durumunda string den double sayıya dönüşüm sağlar. Başarısız durumunda dönüşü 0.0 olarak döner.
@@ -29,6 +37,21 @@ exit(int code): void									/// Program normal olarak sonlandırılır ve ardı
 getenv(const char* varname): char*						/// Başarı durumunda ortam değişkenlerini dönderir. Başarısız durmunda null olarak dönüş sağlar.
 system(const char* command): int						/// Her hangi bir komut işlemini çağırmaya yarar. Başarı durumunda sıfırdan farklı bir değr döner. Başarısız durmunda sıfır değeri döner.
 _Exit(int status): void									/// Program normal olarak sonlandırılır ve ardın dan temizleme işlemi yapılmaz varsa quick_exit veya at_quick_exit gibi callbackler çağrılmaz. Only C++11
+bsearch(const void* key, const void* base, size_t number, size_t size, int (*compare)(const void*, const void*)): void* /// Array içerissinde verilen key ile birlikte ikilik tabanda arama yapar. Başarı durumunda bulunan değeri döner. Başarısız durumunda NULL olarak dönüş sağlar.
+qsort(void* base, size_t num, size_t size, int (*compare)(const void*, const void*)): void	/// Arrayi hızlı sıralama yapar.
 
+abs(int n): int											/// Verilen sayının mutlak değerini alır.
+labs(long x): long										/// Verilen long sayının mutlak değerini alır.
+llabs(long long x): long long							/// Verilen long long sayının mutlak değerini alır.
+div(int numrator, int denominator):	div_t				/// Verilen sayıları bölümünü sağlar ve bölünen ve kalan olarak dönüş yapar.
+ldiv(long numrator, long denominator): ldiv_t			/// Verilen sayıları bölümünü sağlar ve bölünen ve kalan olarak dönüş yapar. Only C++11
+lldiv(long long numrator, long long denominator): lldiv_t/// Verilen sayıları bölümünü sağlar ve bölünen ve kalan olarak dönüş yapar. Only C++11
 
+mblen(const char* str, size_t maxCount): int			/// En fazla baytı inceleyerek str ile gösterilen çok baytlı karakterin boyutunu döndürür. Başarı durumunda karacterlerin byte cinsinden boyutunu dönderir. Str null değer ise sıfır değerini dönderir.
+mbtowc(wchar_t* dst, const char* src, size_t srcSize): int/// Verilen src daki karakterleri dest üzerine dönüştürür. dönüş olarak byte cinsinde uznluğunu döner. src null değer ise sıfır değerini dönderir.
+wctomb(char* mbch, wchar_t wc): int						/// Verilen wc daki karakterleri mbch üzerine dönüştürür. dönüş olarak byte cinsinde uznluğunu döner.
 
+mbstowcs(wchar_t* dst, const char* src, size_t maxCount): size_t/// Verilen src daki string olarak dest üzerine dönüştürür. dönüş olarak byte cinsinde uznluğunu döner. src null değer ise sıfır değerini dönderir.
+wcstombs(char* dst, const wchar_t* src, size_t maxCount): size_t/// Verilen src daki string olarak dest üzerine dönüştürür. dönüş olarak byte cinsinde uznluğunu döner.
+
+___mb_cur_max_func(void): int							/// Geçerli veya belirtilen yerel ayar için çok bytelı bir karakter içindeki en fazla bayt sayısını alır.
