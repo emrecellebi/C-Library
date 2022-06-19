@@ -1,4 +1,5 @@
 /***************** stdio.h *****************/
+// https://cplusplus.com/reference/cstdio/
 /*** define ***/
 L_tmpnam 												/// (sizeof(_P_tmpdir) + 12) -- Temp directory
 BUFSIZ													/// 512 -- Buffer Size için
@@ -44,25 +45,63 @@ putc(int ch, FILE* file): int							/// Dosya içeriğine char tipinde veri yaza
 ungetc(int ch, FILE* file): int							/// Dosyadan okunan ilk karakteri alır verilen karakter ile değiştirilir. Aynı zamanda fgetc veya getc dönmesini engeller ilk karakteri almasını sağlar. Başarı durumunda geri konulan karakteri iade eder. Her hangi bir hata durumda ise feof dönderir.
 setbuf(FILE* file, char* buffer): void					/// Dosya arasında bir ara bellek olarak davranır.
 setvbuf(FILE* file, char* buffer, int mode, size_t size): int 				/// Dosya arasında bir ara bellek oluşturur. Başarı durumunda 0 değeri döner, başarısız durumunda sıfırdan farklı bir değer döner.
-printf(const char* format, ...): int					/// Ekrana çıktı verir. Aynı zamanda yazılan değerin uzunluğunu verir. Başarı durumunda yazılan toplam karakter sayısını döndürür. Her hangi bir hata durumda ise ferror dönderir.
 scanf(const char* format, ...): int						/// Input girdi alır. Başarı durumunda okun input sayısını dönderiyor. Her hangi bir hata durumda ise ferror ve feof dönderir.
+printf(const char* format, ...): int					/// Ekrana çıktı verir. Aynı zamanda yazılan değerin uzunluğunu verir. Başarı durumunda yazılan toplam karakter sayısını döndürür. Her hangi bir hata durumda ise ferror dönderir.
 perror(const char* str): void							/// Hata mesajlarını yazdırır.
 getchar(void): int										/// Standart input dan girdi alır. Karakter olarak. Başarılı olduğunda, okunan karakter döndürülür Her hangi bir hata durumda ise feof veya ferror dönderir.
 gets(char* str): char*									/// Standart input dan veri okur değişkene yazar. Başarı durumunda okunan stringi döner. Eğer bir değer boş ise dönüşü null olur. Her hangi bir hata durumda ise feof dönderir.
 putchar(int ch): int									/// Standart output dan çıktı verir, Karakter olarak. Başarılı olduğunda, yazılan karakter döndürülür. Her hangi bir hata durumda ise feof veya ferror dönderir.
 puts(const char* str): int								/// Standart output dan çıktı verir. Başarı durumunda posiztif, başarısız durumunda negatif değer döner. Her hangi bir hata durumda ise ferror dönderir.
-snprintf(char* stream, size_t n, const char* format, ...): int /// Belirtilen buffer arrayinde formatlanmış bir şekilde saklar. Başarı durumda yazılan verinibn uzunluğunu verir. Başarısız -1 değeri döner. Only C++11
+snprintf(char* stream, size_t n, const char* format, ...): int/// Belirtilen buffer arrayinde formatlanmış bir şekilde saklar. Başarı durumda yazılan verinibn uzunluğunu verir. Başarısız -1 değeri döner. Only C++11
 sprintf(char* stream, const char* format, ...): int		/// Belirtilen buffer arrayinde formatlanmış bir şekilde saklar. Başarı durumda yazılan verinin uzunluğunu verir. Başarısız -1 değeri döner
 sscanf(const char* source, const char* format, ...): int/// Belirtilen c dizisinden verilen değişkelere okumayı yapar. Başarı durumunda ise okunan değer sayıdını döner. Başarısız -1 değeri döner
 vfprintf(FILE* file, const char* format, va_list arg): int					/// 
-vfscanf(FILE* file, const char* format, va_list arg): int					/// Only C++11
-vprintf(const char* format, va_list arg): int			///
-vscanf(const char* format, va_list arg): int			/// Only C++11
-vsnprintf(char* stream, size_t n, const char* format, va_list arg): int		/// Only C++11
 vsprintf(char* stream, const char* format, va_list arg): int				///
-vsscanf(const char* source, const char* format, va_list arg): int			/// Only C++11
+vprintf(const char* format, va_list arg): int			///
+vsnprintf(char* stream, size_t n, const char* format, va_list arg): int/// Only C++11
+vfscanf(FILE* file, const char* format, va_list arg): int/// Only C++11
+vscanf(const char* format, va_list arg): int			/// Only C++11
+vsscanf(const char* source, const char* format, va_list arg): int/// Only C++11
 remove(const char* fileName): int						/// Dosya silme işlemi. Başarı durumunda sıfır değerini döner. Başarısız durumunda sıfırdan farklı bir değer döner.
 rename(const char* oldName, const char* newName): int	/// Dosya yeniden isimlendir. Başarı durumunda sıfır değerini döner. Başarısız durumunda sıfırdan farklı bir değer döner. 
 tmpfile(void): FILE*									/// Geçici bir file oluşturur wb+ modunu kullanarak program bittiğide dosya silinir. Başarı durumunda FILE dolu döner. Başarısız durumunda FILE null olarak döner
 tmpnam(char* buffer): char*								/// Var olan bir dosyadan farklı isme sahip bir dosya ismi döner. Başarılı olduğunda oluşturulan dosya ismini döner.
 
+/// Yukarıdakiler ile aynı görevi yapmaktadırlar
+__mingw_fscanf(FILE* file, const char* format, ...): int
+__mingw_sscanf(const char* src, const char* format, ...): int
+__mingw_scanf(const char* format, ...): int
+__mingw_snprintf(char* stream, size_t n, const char* format, ...): int
+__mingw_printf(const char* format, ...): int
+__mingw_vsscanf(const char source, const char* format, va_list arg): int
+__mingw_vscanf(const char* format, va_list arg): int
+__mingw_vfscanf(FILE* file, const char* format, va_list arg): int
+__mingw_vsnprintf(char* stream, size_t n, const char* format, va_list arg): int
+__mingw_vprintf(const char* format, va_list arg): int
+__mingw_fprintf(FILE* file, const char* format, ...): int
+__mingw_vfprintf(FILE* file, const char* format, va_list arg): int
+__mingw_sprintf(char* stream, const char* format, ...): int
+__mingw_vsprintf(char* stream, const char* format, va_list arg): int
+
+/// bu methodlarda linker hatası alınabilir. Fakat yukarıdakiler ile aynı görevi yapmaktadırlar.
+__ms_sscanf(const char* src, const char* format, ...): int
+__ms_scanf(const char* format, ...): int
+__ms_fscanf(FILE* file, const char* format, ...): int
+__ms_printf(const char* format, ...): int
+__ms_vprintf(const char* format, va_list arg): int
+__ms_fprintf(FILE* file, const char* format, ...): int
+__ms_vfprintf(FILE* file, const char* format, va_list arg): int
+__ms_sprintf(char* stream, const char* format, ...): int
+__ms_vsprintf(char* stream, const char* format, va_list arg): int
+__ms_vscanf(const char* format, va_list arg): int
+__ms_vfscanf(FILE* file, const char* format, va_list arg): int
+__ms_vsscanf(const char* str, const char* format, va_list arg): int
+
+
+
+/// Linux Tarafında çalışan methodlar olabilir.
+asprintf(char** ret, const char* format, ...): int		///
+vasprintf(char** ret, const char* format, va_list args): int///
+
+__mingw_asprintf(char**, const char*, ...): int
+__mingw_vasprintf(char**, const char*, va_list arg): int

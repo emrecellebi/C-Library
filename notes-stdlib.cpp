@@ -1,4 +1,5 @@
 /***************** stdlib.h *****************/
+// https://cplusplus.com/reference/cstdlib/
 /*** define ***/
 EXIT_SUCCESS 											/// 0 --- Çıkış kodu
 EXIT_FAILURE 											/// 1 --- Çıkış Iptal kodu
