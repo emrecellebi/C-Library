@@ -7,7 +7,7 @@ int main(int argc, char** argv)
 	fptr = _fsopen("01.txt", "w", 0x10);
 	if(fptr != NULL)
 	{
-		fputs("Meleğim", fptr);
+		fputs("Test", fptr);
 	}
 	_fcloseall();
 
