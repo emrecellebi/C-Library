@@ -1,6 +1,8 @@
 /***************** stdio.h *****************/
 // https://cplusplus.com/reference/cstdio/
-/*** define ***/
+// https://docs.microsoft.com/tr-tr/cpp/c-runtime-library/reference/fsopen-wfsopen
+
+/***************** Define Tanımları *****************/
 L_tmpnam 												/// (sizeof(_P_tmpdir) + 12) -- Temp directory
 BUFSIZ													/// 512 -- Buffer Size için
 _IOFBF													/// 0x0000 -- Tam olarak ara belleğe al
@@ -25,12 +27,12 @@ _SYS_OPEN 												/// 20 --
 TMP_MAX 												/// 32767 -- 
 _TWO_DIGIT_EXPONENT 									/// 0x1 -- 
 
-/*** typedef ***/
+/***************** Typedef Tanımları *****************/
 fpos_t: long long										/// 
 fpos_t: __int64											/// 
-FILE: struct											///
+FILE: struct											/// 
 
-/*** method ***/
+/***************** Methodlar *****************/
 freopen(const char* fileName, const char* mode, FILE* file): FILE* 			/// Dosya adıyla belirtilen dosyayı açmak veya erişim modunu değiştirmek için akışı yeniden kullanır. Bu işlev özellikle stdin, stdout ve stderr gibi önceden tanımlanmış akışları belirli dosyalara yeniden yönlendirmek için kullanışlıdır
 fopen(const char* fileName, const char* mode): FILE*	/// Dosya Açar
 fclose(FILE* stream): int								/// Açık olan dosyayı kapatır.
@@ -48,8 +50,8 @@ fsetpos(FILE* stream, const fpos_t* pos): int			/// imleç konumunu tanımlar. B
 fseek(FILE* file, int offset, int origin): int			/// İmlec konumunu ayarla. Başarı durmunda sıfır dönüş yapar. Her hangi bir hata durumda ise ferror dönderir.
 ftell(FILE* file): long									/// İmlecin geçerli konumunu verir. Binary dosyalarda doyanın uzunlunu verir. Başarısız durumunda -1 döner.
 rewind(FILE* file): void								/// Imlecin konumunu dosyanın başlangıcına ayarla.
-fread(void* dstBuf, size_t elementSize, size_t count, FILE* file): size_t 	/// Return olarak başarıyla okunan öge sayısını döndürür. Bu sayı count değrinde farklıyasa okumayı başarılı olarak yapamamışdır. Her hangi bir hata durumda ise ferror ve feof dönderir.
-fwrite(const void* str, size_t size, size_t count, FILE* file): size_t		/// Return olarak başarıyla yazılan öge sayısını döndürür. Bu sayı count değrinde farklıyasa yazmayı başarılı olarak yapamamışdır. Her hangi bir hata durumda ise ferror ve feof dönderir.
+fread(void* dstBuf, size_t elementSize, size_t count, FILE* file): size_t 	/// Return olarak başarıyla okunan öge sayısını döndürür. Bu sayı count değrinde farklıysa okumayı başarılı olarak yapamamışdır. Her hangi bir hata durumda ise ferror ve feof dönderir. Ayrıca binary data okuyabilir.
+fwrite(const void* str, size_t size, size_t count, FILE* file): size_t		/// Return olarak başarıyla yazılan öge sayısını döndürür. Bu sayı count değrinde farklıysa yazmayı başarılı olarak yapamamışdır. Her hangi bir hata durumda ise ferror ve feof dönderir. Ayrıca binary data yazabilir.
 clearerr(FILE* file): void								/// Tüm hata durumlarını sıfırla
 getc(FILE* stream): int									/// Dosyadan karaker olarak okur. Dönüş olarak okunan karakteri döner eğer boş dosya içeriği -1 döner. Her hangi bir hata durumda ise feof dönderir.
 putc(int ch, FILE* file): int							/// Dosya içeriğine char tipinde veri yazar. Yazılan karakteri int olarak geri döndür. Her hangi bir hata durumda ise ferror dönderir.
@@ -76,14 +78,29 @@ vsscanf(const char* source, const char* format, va_list arg): int/// Only C++11
 remove(const char* fileName): int						/// Dosya silme işlemi. Başarı durumunda sıfır değerini döner. Başarısız durumunda sıfırdan farklı bir değer döner.
 rename(const char* oldName, const char* newName): int	/// Dosya yeniden isimlendir. Başarı durumunda sıfır değerini döner. Başarısız durumunda sıfırdan farklı bir değer döner. 
 tmpfile(void): FILE*									/// Geçici bir file oluşturur wb+ modunu kullanarak program bittiğide dosya silinir. Başarı durumunda FILE dolu döner. Başarısız durumunda FILE null olarak döner
-tmpnam(char* buffer): char*								/// Var olan bir dosyadan farklı isme sahip bir dosya ismi döner. Başarılı olduğunda oluşturulan dosya ismini döner.
-__acrt_iob_func(unsigned index): FILE*					/// standart dosya giriş çıkış işelmi için kullanılır. 1 Standart çıkış, 2 Standart Hata Çıkışı, 3 Standart Input
+tmpnam(char* buffer): char*								/// Var olan bir dosyadan farklı isime sahip bir dosya ismi döner. Başarılı olduğunda oluşturulan dosya ismini döner.
+
+__acrt_iob_func(unsigned index): FILE*					/// Standart dosya giriş çıkış işelemi için kullanılır. 1 Standart çıkış, 2 Standart Hata Çıkışı, 3 Standart Input
 _fsopen(const char* filename, const char* mode, int shFlag): FILE* /// Dosya Paylaşımı ile bir dosya akışı açar.
 _fdopen(int fileHandle, const char* mode): FILE* 		///
 _fcloseall(void): int									/// Açık olan tüm dosyaları kapatır. Başarı durumun da 1 değerini döndürür. Başarısız durumun da 0 değeri döner
+_fgetchar(void): int									/// Standart input dan girdi alır. Karakter olarak. Başarılı olduğunda, okunan karakter döndürülür Her hangi bir hata durumda ise feof veya ferror dönderir.
+_fileno(FILE* file): int								/// Dosya tanımlayıcısını döndürür. Başarısız durumunda -1 döner.
+_tempnam(const char* dirName, const char* filePrefix): char*/// Belirtilen klasör ve dosya imini kullanarak geçici bir dosya oluştur. Başarılı olduğunda oluşturulan dosya ismini döner.
+_flushall(void): int									/// Sıfır değeri başarıyı gösterir. Her hangi bir hata durumda ise ferror dönderir.
+_fputchar(int ch): int									/// Dosya içeriğine çıktı verir, Karakter olarak. Başarılı olduğunda, yazılan karakter döndürülür. Her hangi bir hata durumda ise feof veya ferror dönderir.
 
+/***************** 64bit Methodlar *****************/
+_fseeki64(FILE* file, __int64 offset, int origin): int	/// İmlec konumunu ayarla. Başarı durmunda sıfır dönüş yapar. Her hangi bir hata durumda ise ferror dönderir.
+fopen64(const char* filename, const char* mode): FILE*	/// Dosya Açar
+fgetpos64(FILE* file, fpos_t* pos): int					/// İmlec konumunu alır. Başarı durmunda sıfır dönüş yapar. Hata durmunda sıfırdan farklı bir değer döner. Only 64bit için geçerli
+fsetpos64(FILE* file, const fpos_t* pos): int			/// imleç konumunu tanımlar. Başarı durmunda sıfır dönüş yapar. Hata durmunda sıfırdan farklı bir değer döner.
 
-/// Yukarıdakiler ile aynı görevi yapmaktadırlar
+/***************** POSIX Methodlar *****************/
+_fsopen(const char* filename, const char* mode): FILE*	/// 
+fileno(FILE* file): int
+
+/***************** MinGW Methodlar *****************/
 __mingw_fscanf(FILE* file, const char* format, ...): int
 __mingw_sscanf(const char* src, const char* format, ...): int
 __mingw_scanf(const char* format, ...): int
@@ -107,7 +124,7 @@ __mingw_vsprintf(char* stream, const char* format, va_list arg): int
 
 
 /***************** Linker Hatası *****************/
-/// Fakat yukarıdakiler ile aynı görevi yapmaktadırlar.
+/***************** MS Methodlar *****************/
 __ms_sscanf(const char* src, const char* format, ...): int
 __ms_scanf(const char* format, ...): int
 __ms_fscanf(FILE* file, const char* format, ...): int
