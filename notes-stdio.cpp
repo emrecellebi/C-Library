@@ -1,6 +1,6 @@
 /***************** stdio.h *****************/
 // https://cplusplus.com/reference/cstdio/
-// https://docs.microsoft.com/tr-tr/cpp/c-runtime-library/reference/fsopen-wfsopen
+// https://docs.microsoft.com/tr-tr/cpp/c-runtime-library
 
 /***************** Define Tanımları *****************/
 L_tmpnam 												/// (sizeof(_P_tmpdir) + 12) -- Temp directory
@@ -86,12 +86,16 @@ _fdopen(int fileHandle, const char* mode): FILE* 		///
 _fcloseall(void): int									/// Açık olan tüm dosyaları kapatır. Başarı durumun da 1 değerini döndürür. Başarısız durumun da 0 değeri döner
 _fgetchar(void): int									/// Standart input dan girdi alır. Karakter olarak. Başarılı olduğunda, okunan karakter döndürülür Her hangi bir hata durumda ise feof veya ferror dönderir.
 _fileno(FILE* file): int								/// Dosya tanımlayıcısını döndürür. Başarısız durumunda -1 döner.
-_tempnam(const char* dirName, const char* filePrefix): char*/// Belirtilen klasör ve dosya imini kullanarak geçici bir dosya oluştur. Başarılı olduğunda oluşturulan dosya ismini döner.
-_flushall(void): int									/// Sıfır değeri başarıyı gösterir. Her hangi bir hata durumda ise ferror dönderir.
-_fputchar(int ch): int									/// Dosya içeriğine çıktı verir, Karakter olarak. Başarılı olduğunda, yazılan karakter döndürülür. Her hangi bir hata durumda ise feof veya ferror dönderir.
+_tempnam(const char* dirName, const char* filePrefix): char* /// Belirtilen klasör ve dosya imini kullanarak geçici bir dosya oluştur. Başarılı olduğunda oluşturulan dosya ismini döner.
+_flushall(void): int									/// Açık akış sayısını (giriş ve çıkış) döndürür. Hata iadesi yoktur.
+_fputchar(int ch): int									/// Standart output çıktı verir, Karakter olarak. Başarılı olduğunda, yazılan karakter döndürülür. Her hangi bir hata durumda ise feof veya ferror dönderir.
+_getmaxstdio(void): int									/// Akış g/ç düzeyinde izin verilen aynı anda açık dosya sayısını döndürür.
+_getw(FILE* file): int									/// Bir akıştan tamsayı alır. 
+
 
 /***************** 64bit Methodlar *****************/
 _fseeki64(FILE* file, __int64 offset, int origin): int	/// İmlec konumunu ayarla. Başarı durmunda sıfır dönüş yapar. Her hangi bir hata durumda ise ferror dönderir.
+_ftelli64(FILE* file): __int64							/// İmlecin geçerli konumunu verir. Binary dosyalarda doyanın uzunlunu verir. Başarısız durumunda -1 döner.
 fopen64(const char* filename, const char* mode): FILE*	/// Dosya Açar
 fgetpos64(FILE* file, fpos_t* pos): int					/// İmlec konumunu alır. Başarı durmunda sıfır dönüş yapar. Hata durmunda sıfırdan farklı bir değer döner. Only 64bit için geçerli
 fsetpos64(FILE* file, const fpos_t* pos): int			/// imleç konumunu tanımlar. Başarı durmunda sıfır dönüş yapar. Hata durmunda sıfırdan farklı bir değer döner.
