@@ -21,9 +21,18 @@ strxfrm(char* dest, const char* src, size_t maxCount): size_t	/// Kaynakdan beli
 
 /** Searching - Arama **/
 memchr(const void* buf, int val, size_t maxCount): void*		/// Belitilen buf içerisinde verilen val değerindeki karakteri bulur. Return olarak bulunan karakterden sonraki kısmını döner.
+strchr(const char* str, int val): char*							/// Belitilen str içerisinde verilen val değerindeki karakteri bulur. Return olarak bulunan karakterden sonraki kısmını döner.
+strcspn(const char* str, const char* control): size_t 			/// Belirtilen str içerisinde verilen control karakterlerini arar eğer ki bulamaz ise str1 in uzunluğunu döner. Return olarak bulunan karakterin bir alt poizisyonunu döner.
+strpbrk(const char* str, const char* control): char*			/// Belitilen str içerisinde verilen control değerindeki karakteri bulur. Return olarak bulunan karakteri döner.
+strrchr(const char str, int ch): char*							/// Belitilen str içerisinde verilen ch değerindeki karakteri sondan aram yaparak bulur. Return olarak bulunan karakteri döner.
+strspn(const char* str, const char* control): size_t			/// Belirtilen str içerisinde verilen control karakterleri eğer ki eşleşiyor ise eşleşen karakterin uzunluğunu döner.
+strstr(const char* str, const char* subStr): char*				/// Belirtilen str içerisinde verilen subStr karakterini çıkartır. Return olarak ise çırkartılan karakterleri dönüş yapar.
+strtok(char* str, const char* delim): char*						/// Belirtilen str içerisinde verilen delim karakterleri ile bölme işlemi yapar. Return olarak parça parça dönüş sağlar.
 
-
-
+/** Other - Diğer **/
+memset(void* dst, int sal, size_t size): void*					/// Belitilen memory için verilen int karakterini verilen size kadar set eder. Return olarak dst döner.
+strerror(int): char*											/// System hata mesajlarını dönderir.
+strlen(const char* str): size_t									/// Belirtilen str uzunluğunu dönderir.
 
 
 
