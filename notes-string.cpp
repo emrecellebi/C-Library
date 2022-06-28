@@ -36,6 +36,8 @@ strlen(const char* str): size_t									/// Belirtilen str uzunluğunu dönderir
 
 
 
+_stricmp(const char* str1, const char* str2): int				/// str1 ile str2 değerlererini karşılaştırır. Return olarak eğer iki değer bir birine eşit ise 0 olarak döner değil ise -1 yada 1 olarak döner.
+
 
 
 
