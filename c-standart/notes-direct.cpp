@@ -1,7 +1,11 @@
 /***************** direct.h *****************/
 
 /***************** Struct Tanımları *****************/
-_diskfree_t														/// unsigned total_clusters || unsigned avail_clusters || unsigned sectors_per_cluster || unsigned bytes_per_sector
+_diskfree_t														/// 
+	unsigned total_clusters
+	unsigned avail_clusters
+	unsigned sectors_per_cluster
+	unsigned bytes_per_sector
 
 /***************** Method Tanımları *****************/
 _getcwd(char* dstBuf, int sizeInBytes): char*					/// Bulunduğu dizinin path döner. Herhangi bir hata durumunda perror dönderir.
