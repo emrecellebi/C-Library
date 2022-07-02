@@ -42,3 +42,10 @@ SDL_RenderClear(SDL_Renderer* renderer): int
 	\param renderer 	--> oluşturulan renderer verilir.
 **/
 SDL_RenderPresent(SDL_Renderer* renderer): void
+
+/**
+	Oluşturulan renderer yok et
+	
+	\param renderer 		--> Oluşturulan SDL_Renderer değişkeni
+**/
+SDL_DestroyRenderer(SDL_Renderer* renderer): void

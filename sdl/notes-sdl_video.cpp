@@ -38,6 +38,13 @@
 **/
 SDL_CreateWindow(const char* title, int x, int y, int w, int h, Uint32 flags): SDL_Window*
 
+/**
+	Bir pencereyi yok et.
+	"window" NULL ise, bu işlev SDL hata mesajını "Geçersiz Pencere" olarak ayarladıktan hemen sonra döner.
+	
+	\param window 		--> yok etmek için SDL_Window değişkeni
+**/
+SDL_DestroyWindow(SDL_Window* window): void
 
 
 

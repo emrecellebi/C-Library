@@ -1,38 +1,15 @@
 /***************** sdl_events.h *****************/
 
 /***************** Method Tanımları *****************/
-SDL_PollEvent(SDL_Event* event): int					/// Event olayları tutulur. Barşaralı ise 1 değeri döner. Başarasız ise 0 değeri döner.
-
-/***************** Typedef Union Tanımları *****************/
-SDL_Event
-    Uint32 type;                            /**< Event type, shared with all events */
-    SDL_CommonEvent common;                 /**< Common event data */
-    SDL_DisplayEvent display;               /**< Display event data */
-    SDL_WindowEvent window;                 /**< Window event data */
-    SDL_KeyboardEvent key;                  /**< Keyboard event data */
-    SDL_TextEditingEvent edit;              /**< Text editing event data */
-    SDL_TextEditingExtEvent editExt;        /**< Extended text editing event data */
-    SDL_TextInputEvent text;                /**< Text input event data */
-    SDL_MouseMotionEvent motion;            /**< Mouse motion event data */
-    SDL_MouseButtonEvent button;            /**< Mouse button event data */
-    SDL_MouseWheelEvent wheel;              /**< Mouse wheel event data */
-    SDL_JoyAxisEvent jaxis;                 /**< Joystick axis event data */
-    SDL_JoyBallEvent jball;                 /**< Joystick ball event data */
-    SDL_JoyHatEvent jhat;                   /**< Joystick hat event data */
-    SDL_JoyButtonEvent jbutton;             /**< Joystick button event data */
-    SDL_JoyDeviceEvent jdevice;             /**< Joystick device change event data */
-    SDL_ControllerAxisEvent caxis;          /**< Game Controller axis event data */
-    SDL_ControllerButtonEvent cbutton;      /**< Game Controller button event data */
-    SDL_ControllerDeviceEvent cdevice;      /**< Game Controller device event data */
-    SDL_ControllerTouchpadEvent ctouchpad;  /**< Game Controller touchpad event data */
-    SDL_ControllerSensorEvent csensor;      /**< Game Controller sensor event data */
-    SDL_AudioDeviceEvent adevice;           /**< Audio device event data */
-    SDL_SensorEvent sensor;                 /**< Sensor event data */
-    SDL_QuitEvent quit;                     /**< Quit request event data */
-    SDL_UserEvent user;                     /**< Custom event data */
-    SDL_SysWMEvent syswm;                   /**< System dependent window event data */
-    SDL_TouchFingerEvent tfinger;           /**< Touch finger event data */
-    SDL_MultiGestureEvent mgesture;         /**< Gesture event data */
-    SDL_DollarGestureEvent dgesture;        /**< Gesture event data */
-    SDL_DropEvent drop;                     /**< Drag and drop event data */
-    Uint8 padding[sizeof(void *) <= 8 ? 56 : sizeof(void *) == 16 ? 64 : 3 * sizeof(void *)];
+/**
+	Şu anda bekleyen etkinlikler için havuz.
+	"Event" null değilse, bir sonraki olay kuyruktan kaldırılır ve "event" ile işaret edilen SDL_EVENT yapısında saklanır. İade edilen 1, hemen SDL olay yapısında depolanan bu olayı ifade eder - takip edilecek bir olay değil.
+	"Event" NULL ise, sırada bir olay varsa 1 döndürür, ancak sıradan kaldırmazsa.
+	Bu işlev dolaylı olarak sdl_pumpevents () çağırabileceğinden, bu işlevi yalnızca video modunu ayarlayan iş parçacığında çağırabilirsiniz.
+	SDL_PollEvent (), ana döngüden yapılabileceği ve yayınlanmasını beklerken ana döngüyü askıya almadığı için sistem olaylarını almanın tercih edilen yoludur.
+	Ortak uygulama, olay kuyruğunu her kare, genellikle oyunun durumunu güncellemeden önce ilk adımı tam olarak işlemektir:
+	
+	\param event 	--> Sıradan bir sonraki olayla doldurulacak SDL_EVENT yapısı veya null
+	\returns 		--> 1 Bekleyen bir olay varsa veya mevcut değilse 0.
+**/
+SDL_PollEvent(SDL_Event* event): int
